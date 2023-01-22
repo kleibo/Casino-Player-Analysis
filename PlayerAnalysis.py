@@ -2,7 +2,8 @@ import pandas as pd
 from sklearn.cluster import KMeans
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
-from ipywidgets import interact, fixed, widgets
+import tkinter as tk
+from tkinter import ttk
 import os
 
 
@@ -42,14 +43,18 @@ class PlayerAnalysis:
     def plotLinearRegression(self, models):
         # Create a drop-down list to select the player
         playerList = list(models.keys())
-        playerDropDown = widgets.Dropdown(options=playerList, value=playerList[0])
+        root = tk.Tk()
+        root.title("Linear Regression")
+        playerDropDown = ttk.Combobox(root, values=playerList)
+        playerDropDown.current(0)
+        playerDropDown.pack()
         
         # Plot the linear regression for the selected player
-        def onPlayerChange(player, playerData):
+        def onPlayerChange(*args):
             plt.figure()
-            player = change['new']
+            player = int(playerDropDown.get())
             model = models[player]
-            data = playerData[playerData['PlayerId'] == player]
+            data = self.playerData[self.playerData['PlayerId'] == player]
             x = data['GamingDt_order'].values.reshape(-1, 1)
             y = data['TotlTheo'].values
             plt.scatter(x,y)
@@ -58,8 +63,9 @@ class PlayerAnalysis:
             plt.ylabel('Total Theo')
             plt.title(f'Linear Regression for player {player}')
             plt.show()
-        playerDropDown.observe(onPlayerChange, names='value')
-        print(playerDropDown)
+
+        playerDropDown.bind("<<ComboboxSelected>>", onPlayerChange)
+        root.mainloop()
         
         
 
