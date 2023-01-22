@@ -10,8 +10,8 @@ filepath = askopenfilename()
 # Create a PlayerAnalysis object with filepath directory
 analysis = PlayerAnalysis.PlayerAnalysis(filepath)
 
-analysis.linearRegressionByPlayer()
-
+models = analysis.linearRegressionByPlayer()
+analysis.plotLinearRegression(models)
 
 # Save Results
 # clustering.saveResults("Model")
