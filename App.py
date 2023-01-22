@@ -1,18 +1,17 @@
 from tkinter import Tk
 from tkinter.filedialog import askopenfilename
-import PlayerClustering
+import PlayerAnalysis
 
 # Open a file dialog to select the player data file
 root = Tk()
 root.withdraw()
 filepath = askopenfilename()
 
-# Create a PlayerClustering object and cluster the players
-clustering = PlayerClustering.PlayerClustering(filepath)
-clustering.createClusters()
+# Create a PlayerAnalysis object with filepath directory
+analysis = PlayerAnalysis.PlayerAnalysis(filepath)
 
-# Plot the clusters
-clustering.plotClusters()
+analysis.linearRegressionByPlayer()
+
 
 # Save Results
 # clustering.saveResults("Model")
