@@ -13,7 +13,7 @@ class PlayerAnalysis:
         
         
     def theoPerVisit(self):
-        theoPerVisit = self.playerData.groupby(['PlayerID']).agg({'TotlVisit': 'sum', 'TotlTheo': 'sum'})
+        theoPerVisit = self.playerData.groupby(['PlayerId']).agg({'TotlVisit': 'sum', 'TotlTheo': 'sum'})
         theoPerVisit['average_theo_per_visit'] = theoPerVisit['TotlTheo'] / theoPerVisit['TotlVisit']
         return theoPerVisit
 
@@ -23,34 +23,34 @@ class PlayerAnalysis:
         return descriptiveStats
 
     def linearRegressionByPlayer(self):
-        self.playerData['GamingDt'] = pd.to_datetime(self.data['GamingDt'])
+        self.playerData['GamingDt'] = pd.to_datetime(self.playerData['GamingDt'])
         self.playerData.sort_values(by='GamingDt', inplace=True)
-        self.playerData['GamingDt_order'] = self.playerData.groupby('PlayerID')['GamingDt'].rank()
+        self.playerData['GamingDt_order'] = self.playerData.groupby('PlayerId')['GamingDt'].rank()
 
         # Create a dictionary to store the models
         models = {}
         
         # Group the data by player and fit a linear regression model
-        for player, group in self.playerData.groupby('PlayerID'):
+        for player, group in self.playerData.groupby('PlayerId'):
             x = group['GamingDt_order'].values.reshape(-1, 1)
-            y = group['TotalTheo'].values
+            y = group['TotlTheo'].values
             model = LinearRegression().fit(x, y)
             models[player] = model
-        return model
+        return models
 
 
     def plotLinearRegression(self, models):
         # Create a drop-down list to select the player
-        playerList = list(models.key())
+        playerList = list(models.keys())
         playerDropDown = widgets.Dropdown(options=playerList, value=playerList[0])
-        display(playerDropDown)
+        print(playerDropDown)
 
         # Plot the linear regression for the selected player
         def onPlayerChange(change):
             plt.figure()
             player = change['new']
             model = models[player]
-            data = self.playerData[self.playerData['PlayerID'] == player]
+            data = self.playerData[self.playerData['PlayerId'] == player]
             x = data['GamingDt_order'].values.reshape(-1, 1)
             y = data['TotlTheo'].values
             plt.scatter(x,y)
@@ -62,6 +62,8 @@ class PlayerAnalysis:
         playerDropDown.observe(onPlayerChange, names='value')
 
 
-
+analysis = PlayerAnalysis("/Users/kleib/Code/kleibo/Projects/Casino-Player-Analysis/Test_Data_UnClean.csv")
+models = analysis.linearRegressionByPlayer()
+analysis.plotLinearRegression(models)
 
 
