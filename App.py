@@ -14,8 +14,8 @@ analysis = PlayerAnalysis.PlayerAnalysis(filepath)
 models = analysis.linearRegressionByPlayer()
 analysis.plotLinearRegression(models)
 =======
-analysis.linearRegressionByPlayer()
-
+models = analysis.linearRegressionByPlayer()
+analysis.plotLinearRegression(models)
 >>>>>>> dev2
 
 # Save Results
