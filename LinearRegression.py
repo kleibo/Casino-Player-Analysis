@@ -4,9 +4,9 @@ from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 import tkinter as tk
 from tkinter import ttk
-import PlayerAnalysis
+from PlayerAnalysis import PlayerAnalysis
 
-class LinearRegression(PlayerAnalysis):
+class PlayerLinearRegression(PlayerAnalysis):
     def __init__(self, playerDataFile):
         super().__init__(playerDataFile)
 
@@ -14,14 +14,13 @@ class LinearRegression(PlayerAnalysis):
     def linearRegressionByPlayer(self):
         self.playerData['GamingDt'] = pd.to_datetime(self.playerData['GamingDt'])
         self.playerData.sort_values(by='GamingDt', inplace=True)
-        self.playerData['GamingDt_order'] = self.playerData.groupby('PlayerId')['GamingDt'].rank()
 
         # Create a dictionary to store the models
         models = {}
         
         # Group the data by player and fit a linear regression model
         for player, group in self.playerData.groupby('PlayerId'):
-            x = group['GamingDt_order'].values.reshape(-1, 1)
+            x = group['GamingDt'].values.reshape(-1, 1)
             y = group['TotlTheo'].values
             model = LinearRegression().fit(x, y)
             models[player] = model
@@ -43,7 +42,7 @@ class LinearRegression(PlayerAnalysis):
             player = int(playerDropDown.get())
             model = models[player]
             data = self.playerData[self.playerData['PlayerId'] == player]
-            x = data['GamingDt_order'].values.reshape(-1, 1)
+            x = data['GamingDt'].values.reshape(-1, 1)
             y = data['TotlTheo'].values
             plt.scatter(x,y)
             plt.plot(x, model.predict(x), color = 'red')
@@ -57,6 +56,6 @@ class LinearRegression(PlayerAnalysis):
         root.mainloop()
 
 
-analysis = PlayerAnalysis("/Users/kleib/Code/kleibo/Projects/Casino-Player-Analysis/Test_Data_10_Accts.csv")
+analysis = PlayerLinearRegression("/Users/kleib/Code/kleibo/Projects/Casino-Player-Analysis/Test_Data_10_Accts.csv")
 models = analysis.linearRegressionByPlayer()
 analysis.plotLinearRegression(models)
