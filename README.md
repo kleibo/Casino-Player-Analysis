@@ -1,5 +1,7 @@
 # Casino-Player-Analysis
 
+This program allows the user to analyze casino player data using linear regression and k-means clustering. The program takes in a file with the following columns: PlayerId, TotlTheo, TotlVisit, and GamingDt.
+
 ## Linear Regression
 
 The program first runs a linear regression on each individual player's data, creating a separate model for each player. The user can then select a player from a dropdown list to view the linear regression plot for that player. The plot displays the total theo on the y-axis and gaming date on the x-axis.
@@ -13,10 +15,11 @@ The program then uses k-means clustering to group players into four clusters: hi
 ## Dependencies
 
 This program uses the following libraries:
-    -pandas
-    -scikit-learn
-    -matplotlib
-    -tkinter
+* pandas
+* scikit-learn
+* matplotlib
+* tkinter
+* plotly
 
 ## Usage
 
