@@ -56,6 +56,3 @@ class PlayerLinearRegression(PlayerAnalysis):
         root.mainloop()
 
 
-analysis = PlayerLinearRegression("/Users/kleib/Code/kleibo/Projects/Casino-Player-Analysis/Test_Data_10_Accts.csv")
-models = analysis.linearRegressionByPlayer()
-analysis.plotLinearRegression(models)

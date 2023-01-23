@@ -25,7 +25,7 @@ class PlayerKmeansClustering(PlayerAnalysis):
 
         return playerSummary
 
-    def plotCluster(self):
+    def plotClusterMatPlot(self):
         # Create the scatterplot
         clusteredPlayers = self.clusterPlayers()
 
@@ -46,6 +46,4 @@ class PlayerKmeansClustering(PlayerAnalysis):
         fig = px.scatter(clusteredPlayers, x='TotlVisit', y='TotlTheo', color='Cluster', hover_name="PlayerId")
         fig.show()
 
-analysis = PlayerKmeansClustering("C:/Users/kleib/Code/kleibo/Projects/Casino Data/Test_Data_UnClean - Shortened.csv")
-# analysis.plotCluster()
-analysis.plotClusterspx()
+
