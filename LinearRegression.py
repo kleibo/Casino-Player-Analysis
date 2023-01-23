@@ -1,21 +1,11 @@
 import pandas as pd
-<<<<<<< HEAD
-from sklearn.cluster import KMeans
-=======
->>>>>>> dev2
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 import tkinter as tk
 from tkinter import ttk
-<<<<<<< HEAD
-import PlayerAnalysis
-
-class LinearRegression(PlayerAnalysis):
-=======
 from PlayerAnalysis import PlayerAnalysis
 
 class PlayerLinearRegression(PlayerAnalysis):
->>>>>>> dev2
     def __init__(self, playerDataFile):
         super().__init__(playerDataFile)
 
