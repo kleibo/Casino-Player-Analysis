@@ -1,4 +1,4 @@
-from tkinter import Tk
+import tkinter as tk
 from tkinter.filedialog import askopenfilename
 from PlayerAnalysis import PlayerAnalysis
 from LinearRegression import PlayerLinearRegression
@@ -6,9 +6,8 @@ from KmeansClustering import PlayerKmeansClustering
 
 class Main:
     def __init__(self):
-        
         # Open a file dialog to select the player data file
-        root = Tk()
+        root = tk.Tk()
         root.withdraw()
         self.filepath = askopenfilename()
         root.protocol("WM_DELETE_WINDOW", root.destroy)
@@ -30,6 +29,7 @@ class Main:
 # Create a PlayerAnalysis object with filepath directory
 if __name__ == '__main__':
     main = Main()
+    main.runLinearRegression()
     
 
 
