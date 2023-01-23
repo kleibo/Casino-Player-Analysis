@@ -26,7 +26,7 @@ class PlayerKmeansClustering(PlayerAnalysis):
 
         return playerSummary
 
-    def plotCluster(self):
+    def plotClusterMatPlot(self):
         # Create the scatterplot
         clusteredPlayers = self.clusterPlayers()
 
