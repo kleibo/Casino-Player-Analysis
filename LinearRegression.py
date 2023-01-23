@@ -1,12 +1,11 @@
 import pandas as pd
-from sklearn.cluster import KMeans
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 import tkinter as tk
 from tkinter import ttk
-import PlayerAnalysis
+from PlayerAnalysis import PlayerAnalysis
 
-class LinearRegression(PlayerAnalysis):
+class PlayerLinearRegression(PlayerAnalysis):
     def __init__(self, playerDataFile):
         super().__init__(playerDataFile)
 
@@ -57,6 +56,6 @@ class LinearRegression(PlayerAnalysis):
         root.mainloop()
 
 
-analysis = PlayerAnalysis("/Users/kleib/Code/kleibo/Projects/Casino-Player-Analysis/Test_Data_10_Accts.csv")
+analysis = PlayerLinearRegression("/Users/kleib/Code/kleibo/Projects/Casino-Player-Analysis/Test_Data_10_Accts.csv")
 models = analysis.linearRegressionByPlayer()
 analysis.plotLinearRegression(models)
