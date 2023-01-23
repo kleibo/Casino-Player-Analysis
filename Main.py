@@ -54,9 +54,6 @@ class Main:
 # Create a PlayerAnalysis object with filepath directory
 if __name__ == '__main__':
     main = Main()
-    main.on_select()
+    
     
 
-
-# Save Results
-# clustering.saveResults("Model")
